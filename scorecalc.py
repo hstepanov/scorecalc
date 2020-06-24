@@ -2,19 +2,15 @@
 import sqlite3
 from sys import argv
 # need to make unbreakable input of valid data
+init_dict = {}
 while True:
-    init_list = []
-    appending_list = []
-    part_id = int(input("input participant id: "))
+    part_id = input("input participant id: ")
     part_name = input("input participant name: ")
-    if part_name.isalpha():
-        appending_list.append(part_id)
-        appending_list.append(part_name)
-        init_list.append(appending_list)
-        appending_list.clear()
+    if part_name.isalpha() and part_id is not None:
+        init_dict.update(int(part_id) = part_name)
     else:
         break
-print(init_list)
+print(init_dict)
 
 conn = sqlite3.connect("scorecalc.db")
 cursor = conn.cursor()
