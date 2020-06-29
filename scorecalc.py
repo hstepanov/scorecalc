@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 # Базовый функционал:
-# - Пользовательский ввод данных
+# - Пользовательский ввод данных по участникам (нужно сделать так-же \
+#       добавление комманд и объединение участников по коммандам. \
+#       Так-же необходимо выводить статистику по каждому туру для комманд, \
+#       и итоговую статистику, с распределением мест по коммандам и участникам)
 # - Добавление их в БД
-# - Добавление данных по турам
+# - Редактирование данных в БД, добавление данных по турам
 # - Подсчёт результатов по каждому туру
 # - Вывод результатов по каждому спортсмену
+# - Вывод итоговых данных по всем турам, с распределением участников по местам
 
 import sqlite3
 from sys import argv
-# need to make unbreakable input of valid data
 init_dict = {}
 lst = []
 while True:
@@ -20,7 +23,6 @@ while True:
     else:
         break
 init_dict = dict(lst)
-print(init_dict)
 
 def create_db():
     conn = sqlite3.connect("scorecalc.db")
@@ -38,6 +40,7 @@ def add_participant(part_id, part_name):
     conn.close()
 
 create_db()
+
 for key, value in init_dict.items():
     part_id = key
     part_name = init_dict[key]
