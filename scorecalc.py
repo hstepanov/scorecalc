@@ -12,6 +12,15 @@
 
 import sqlite3
 from sys import argv
+
+# action section
+act = input('Input you\'re choise:
+             1 - Begin new competition
+             2 - Begin new tour in current competition
+             3 - Edit current data
+            ')
+
+# participant input section 
 init_dict = {}
 lst = []
 while True:
