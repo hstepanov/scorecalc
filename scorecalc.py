@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+#
 # Базовый функционал:
 # - Пользовательский ввод данных по участникам (нужно сделать так-же \
 #       добавление комманд и объединение участников по коммандам. \
@@ -11,7 +12,6 @@
 # - Вывод итоговых данных по всем турам, с распределением участников по местам
 
 import sqlite3
-from sys import argv
 
 # action section
 act = input('Input you\'re choise:
@@ -24,8 +24,8 @@ act = input('Input you\'re choise:
 init_dict = {}
 lst = []
 while True:
-    part_id = input("input participant id: ")
-    part_name = input("input participant name: ")
+    part_id = input("Порядковый номер участника: ")
+    part_name = input("Имя участника: ")
     tpl = tuple([part_id, part_name])
     if part_id != '' and part_name.isalpha():
         lst.append(tpl)
@@ -48,16 +48,27 @@ def add_participant(part_id, part_name):
     conn.commit()
     conn.close()
 
-create_db()
+def tour_update():
+    conn = sqlite3.connect("scorecalc.db")
+    cursor = conn.cursor()
+    tour_num = input("Номер тура: ")
+    part_name = input("Имя участника: ")
+    conn.commit()
+    conn.close()
+    
+if act == '1':
+    create_db()
+    for key, value in init_dict.items():
+        part_id = key
+        part_name = init_dict[key]
+        add_participant(part_id, part_name)
+elif act == '2':
+    pass
+elif act == '3':
+    pass
 
-for key, value in init_dict.items():
-    part_id = key
-    part_name = init_dict[key]
-    add_participant(part_id, part_name)
-
-
-conn = sqlite3.connect("scorecalc.db")
-cursor = conn.cursor()
-cursor.execute("SELECT * FROM scorecalc")
-print(cursor.fetchall())
-conn.close()
+#conn = sqlite3.connect("scorecalc.db")
+#cursor = conn.cursor()
+#cursor.execute("SELECT * FROM scorecalc")
+#print(cursor.fetchall())
+#conn.close()
